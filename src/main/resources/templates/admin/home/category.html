@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{/admin/layouts/template.html::view(~{::main},~{::title})}">
+
+<head>
+    <title>ffff</title>
+</head>
+
+<body>
+    <main>
+        <form th:action="@{/category/index}" th:object="${category}" method="post">
+            <input type="hidden" th:field="*{maDanhMuc}" />
+            <input th:field="*{tenDanhMuc}" placeholder="Tên danh mục?" required />
+            <input th:field="*{moTa}" placeholder="Mô tả?" />
+            <hr>
+            <button type="submit" formaction="/category/create">Create</button>
+            <button type="submit" formaction="/category/update">Update</button>
+            <a th:href="@{|/category/delete/${category.maDanhMuc}|}"
+                onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Delete</a>
+            <a href="/category/index">Reset</a>
+        </form>
+
+        <table border="1" style="width:100%">
+            <tr>
+                <th>ID</th>
+                <th>Tên Danh Mục</th>
+                <th>Mô Tả</th>
+                <th>Actions</th>
+            </tr>
+            <th:block th:each="category : ${categories}">
+                <tr>
+                    <td th:text="${category.maDanhMuc}"></td>
+                    <td th:text="${category.tenDanhMuc}"></td>
+                    <td th:text="${category.moTa}"></td>
+                    <td>
+                        <a th:href="@{|/category/edit/${category.maDanhMuc}|}">Edit</a> |
+                        <a th:href="@{|/category/delete/${category.maDanhMuc}|}"
+                            onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Delete</a>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+    </main>
+</body>
+
+</html>
