@@ -10,7 +10,7 @@ import com.example.java6.Repository.AccountRepository;
 
 @Service
 public class AccountService {
-    
+
     @Autowired
     private AccountRepository accountRepository;
 

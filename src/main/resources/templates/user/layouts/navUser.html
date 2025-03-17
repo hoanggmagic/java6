@@ -16,27 +16,8 @@
                         <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
                     </ul>
                     <div class="nav-icons">
-                        <a href="/user/cart" class="icon"><i class="fas fa-shopping-cart"></i></a>
-
-                        <!-- Nếu đã đăng nhập -->
-                        <div th:if="${username != null}" class="dropdown">
-                            <a class="btn btn-light dropdown-toggle" href="#" role="button" id="userDropdown"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <b th:text="${username}"></b>
-                            </a>
-
-                            <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                                <li><a class="dropdown-item" href="/auth/profile">Chỉnh sửa thông tin</a></li>
-                                <li><a class="dropdown-item text-danger" href="/auth/logout">Đăng xuất</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Nếu chưa đăng nhập -->
-                        <a th:if="${username == null}" href="/auth/login" class="btn btn-contact">Đăng nhập</a>
+                        <a href="/user/cart" class="icon"><i class="fas fa-shopping-cart"></i>
                     </div>
-
-
-
                 </div>
             </div>
         </div>
