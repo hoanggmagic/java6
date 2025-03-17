@@ -6,4 +6,3 @@ import com.example.java6.Model.Account;
 public interface AccountRepository extends JpaRepository<Account, String> {
     // Có thể thêm các phương thức tìm kiếm tùy chỉnh nếu cần
 }
-
