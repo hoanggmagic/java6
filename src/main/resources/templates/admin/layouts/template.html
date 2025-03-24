@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" th:fragment="view(content, title)">
-
-<head th:replace="~{/admin/layouts/header}">
+  <head th:replace="~{/admin/layouts/header}">
     <title th:replace="${title}">Hello</title>
-</head>
+  </head>
 
-<body>
-    <header th:replace="~{/admin/layouts/nav}">
-    </header>
+  <body>
+    <header th:replace="~{/admin/layouts/nav}"></header>
     <!-- <nav></nav> -->
     <main th:replace="${content}">
-        <h1>Content</h1>
+      <h1>Content</h1>
     </main>
-    <div th:replace="~{/admin/layouts/footer}">
-    </div>
-</body>
-
+    <div th:replace="~{/admin/layouts/footer}"></div>
+  </body>
 </html>

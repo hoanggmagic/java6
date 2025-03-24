@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{/admin/layouts/template.html::view(~{::main},~{::title})}">
-
-<head>
+<html
+  lang="en"
+  th:replace="~{/admin/layouts/template.html::view(~{::main},~{::title})}"
+>
+  <head>
     <title>ffff</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <main>
-        <h3>CATEGORY MANAGEMENT</h3>
-        <th:block th:replace="@{/category/_form} " />
-        <hr>
-        <th:block th:replace="@{|category/_table|} " />
+      <h3>CATEGORY MANAGEMENT</h3>
+      <th:block th:replace="@{/category/_form} " />
+      <hr />
+      <th:block th:replace="@{|category/_table|} " />
     </main>
-</body>
-
+  </body>
 </html>

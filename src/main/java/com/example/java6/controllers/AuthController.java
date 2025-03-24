@@ -93,7 +93,7 @@ public class AuthController {
         loggedInUser.setEmail(account.getEmail());
 
         if (!imageFile.isEmpty()) {
-            String uploadDir = "D:\\workspace\\lab6\\src\\main\\resources\\static\\images\\";
+            String uploadDir = "D:\\HocKy5\\Java6\\java6\\src\\main\\resources\\static\\images";
             File uploadFolder = new File(uploadDir);
             if (!uploadFolder.exists()) {
                 uploadFolder.mkdirs();
