@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh sửa thông tin</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Chỉnh sửa thông tin cá nhân</h2>
+
+        <form th:action="@{/auth/profile}" method="post" th:object="${account}" enctype="multipart/form-data">
+            <label>Tên đăng nhập:</label>
+            <input type="text" th:field="*{username}" readonly>
+
+            <label>Họ và tên:</label>
+            <input type="text" th:field="*{fullname}" required>
+
+            <label>Email:</label>
+            <input type="email" th:field="*{email}" required>
+
+            <label>Ảnh đại diện:</label>
+            <input type="file" name="imageFile" accept="image/*">
+            <div>
+                <img th:src="@{${account.photo}}" alt="Ảnh đại diện" width="100">
+            </div>
+
+            <label>Mật khẩu mới (bỏ trống nếu không đổi):</label>
+            <input type="password" th:field="*{password}">
+
+            <button type="submit">Lưu thay đổi</button>
+        </form>
+
+        <p th:if="${successMessage}" class="success-message" th:text="${successMessage}"></p>
+        <p th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></p>
+        <a href="/home">Quay lại trang chủ</a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<h3>Search by price</h3>
+<form action="/product/search" method="get">
+    <input name="min" th:value="${param.min}" placeholder="Min Price?">
+    <input name="max" th:value="${param.max}" placeholder="Max Price?">
+    <button>Search</button>
+</form>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Create Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="item : ${items}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.price}"></td>
+            <td th:text="${item.createDate}"></td>
+        </tr>
+    </tbody>
+</table>

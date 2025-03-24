@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Sản phẩm</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Quản lý Sản phẩm</h2>
+
+        <form th:action="@{/admin/product/save}" method="post" th:object="${product}" enctype="multipart/form-data">
+            <input type="hidden" th:field="*{id}">
+
+            <label>Tên sản phẩm:</label>
+            <input type="text" th:field="*{name}" required>
+
+            <label>Giá:</label>
+            <input type="number" th:field="*{price}" step="0.01" required>
+
+            <label>Ngày tạo:</label>
+            <input type="date" th:field="*{createDate}" required>
+
+            <label>Trạng thái:</label>
+            <select th:field="*{available}">
+                <option value="true">Có sẵn</option>
+                <option value="false">Hết hàng</option>
+            </select>
+
+            <label>Danh mục:</label>
+            <select th:field="*{category.id}" required>
+                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">
+                </option>
+            </select>
+
+            <label>Ảnh sản phẩm:</label>
+            <input type="file" name="imageFile" accept="image/*">
+            <div>
+                <img th:src="@{${product.image}}" alt="Ảnh sản phẩm" width="100">
+            </div>
+
+            <button type="submit">Lưu sản phẩm</button>
+        </form>
+
+        <h3>Danh sách Sản phẩm</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên</th>
+                    <th>Giá</th>
+                    <th>Ngày tạo</th>
+                    <th>Trạng thái</th>
+                    <th>Danh mục</th>
+                    <th>Hình ảnh</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.id}"></td>
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td th:text="${product.createDate}"></td>
+                    <td th:text="${product.available} ? 'Có sẵn' : 'Hết hàng'"></td>
+                    <td th:text="${product.category.name}"></td>
+                    <td><img th:src="@{${product.image}}" alt="Ảnh sản phẩm" width="50"></td>
+                    <td>
+                        <a th:href="@{/admin/product/edit/{id}(id=${product.id})}">Sửa</a>
+                        <a th:href="@{/admin/product/delete/{id}(id=${product.id})}"
+                            onclick="return confirm('Xóa sản phẩm này?');">Xóa</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="/home">Quay lại trang chủ</a>
+    </div>
+</body>
+
+</html>

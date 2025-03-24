@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{/admin/layouts/template.html::view(~{::main},~{::title})}">
+
+<head>
+    <title>ffff</title>
+</head>
+
+<body>
+    <main>
+        <h1>Account List</h1>
+        <a href="/accounts/create">Create New Account</a>
+        <table border="1">
+            <tr>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Photo</th>
+                <th>Actions</th>
+            </tr>
+            <tr th:each="account : ${accounts}">
+                <td th:text="${account.username}"></td>
+                <td th:text="${account.fullname}"></td>
+                <td th:text="${account.email}"></td>
+                <td><img th:src="${account.photo}" width="50"></td>
+                <td>
+                    <a th:href="@{/accounts/edit/{username}(username=${account.username})}">Edit</a>
+                    <a th:href="@{/accounts/delete/{username}(username=${account.username})}"
+                        onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+        </table>
+    </main>
+</body>
+
+</html>

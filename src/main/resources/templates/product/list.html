@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{/admin/layouts/template.html::view(~{::main},~{::title})}">
+
+<head>
+    <title>ffff</title>
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <h2>Danh sách Sản phẩm</h2>
+
+            <a href="/admin/product/create">Thêm mới sản phẩm</a>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên</th>
+                        <th>Giá</th>
+                        <th>Ngày tạo</th>
+                        <th>Trạng thái</th>
+                        <th>Danh mục</th>
+                        <th>Hình ảnh</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="product : ${products}">
+                        <td th:text="${product.id}"></td>
+                        <td th:text="${product.name}"></td>
+                        <td th:text="${product.price}"></td>
+                        <td th:text="${product.createDate}"></td>
+                        <td th:text="${product.available} ? 'Có sẵn' : 'Hết hàng'"></td>
+                        <td th:text="${product.category.name}"></td>
+                        <td>
+                            <img th:src="@{${product.image}}" alt="Ảnh sản phẩm" width="50" th:if="${product.image}">
+                        </td>
+                        <td>
+                            <a th:href="@{/admin/product/edit/{id}(id=${product.id})}">Sửa</a>
+                            <a th:href="@{/admin/product/delete/{id}(id=${product.id})}"
+                                onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <a href="/home">Quay lại trang chủ</a>
+        </div>
+    </main>
+</body>
+
+</html>

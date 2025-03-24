@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{/admin/layouts/template.html::view(~{::main},~{::title})}">
+
+<head>
+    <title>ffff</title>
+</head>
+
+<body>
+    <main>
+        <div class="content">
+            <h2>Dashboard - Tổng quan</h2>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card bg-warning">
+                        <div class="card-body">
+                            <i class="fas fa-box"></i>
+                            <a href="/accounts">
+                                <p>Người dùng</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-success">
+                        <div class="card-body">
+                            <i class="fas fa-list"></i>
+                            <a href="/admin/product">
+                                <p>Sản phẩm</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-info">
+                        <div class="card-body">
+                            <i class="fas fa-edit"></i>
+                            <a href="/category/index">
+                                <p>Danh mục sản phẩm</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </main>
+</body>
+
+</html>
