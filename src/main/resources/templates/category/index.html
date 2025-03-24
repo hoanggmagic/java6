@@ -4,15 +4,89 @@
   th:replace="~{/admin/layouts/template.html::view(~{::main},~{::title})}"
 >
   <head>
-    <title>ffff</title>
+    <title>Category Management</title>
   </head>
-
   <body>
-    <main>
-      <h3>CATEGORY MANAGEMENT</h3>
-      <th:block th:replace="@{/category/_form} " />
+    <main class="container mt-4">
+      <h3 class="text-primary">CATEGORY MANAGEMENT</h3>
+
+      <!-- Hiển thị thông báo lỗi hoặc thành công -->
+      <div th:if="${error}" class="alert alert-danger" role="alert">
+        <span th:text="${error}"></span>
+      </div>
+      <div th:if="${success}" class="alert alert-success" role="alert">
+        <span th:text="${success}"></span>
+      </div>
+
+      <!-- Form nhập danh mục -->
+      <form action="/category/index" th:object="${item}" class="mb-4">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <input
+              type="text"
+              th:field="*{id}"
+              class="form-control"
+              placeholder="Category Id?"
+            />
+          </div>
+          <div class="col-md-4">
+            <input
+              type="text"
+              th:field="*{name}"
+              class="form-control"
+              placeholder="Category Name?"
+            />
+          </div>
+          <div class="col-md-4 d-flex align-items-center">
+            <button
+              type="submit"
+              formaction="/category/create"
+              class="btn btn-success me-2"
+            >
+              Create
+            </button>
+            <button
+              type="submit"
+              formaction="/category/update"
+              class="btn btn-warning me-2"
+            >
+              Update
+            </button>
+            <a
+              th:href="@{|/category/delete/${item.id}|}"
+              class="btn btn-danger me-2"
+              >Delete</a
+            >
+            <a href="/category/index" class="btn btn-secondary">Reset</a>
+          </div>
+        </div>
+      </form>
+
       <hr />
-      <th:block th:replace="@{|category/_table|} " />
+
+      <!-- Bảng hiển thị danh mục -->
+      <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="item : ${items}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.name}"></td>
+            <td>
+              <a
+                th:href="@{|/category/edit/${item.id}|}"
+                class="btn btn-primary btn-sm"
+                >Edit</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </main>
   </body>
 </html>
