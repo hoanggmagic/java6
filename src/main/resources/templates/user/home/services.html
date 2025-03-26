@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html
+  lang="vi"
+  th:replace="~{/user/layouts/templateUser.html::view(~{::main}, ~{::content})}"
+>
+  <head>
+    <title th:text="${title}">Dịch Vụ</title>
+  </head>
+
+  <body>
+    <main class="container py-4">
+      <h1 class="text-center mb-4">Dịch Vụ Của Chúng Tôi</h1>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              src="/images/service1.jpg"
+              class="card-img-top"
+              alt="Dịch vụ 1"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Dịch vụ pha chế</h5>
+              <p class="card-text">
+                Chúng tôi cung cấp dịch vụ pha chế cà phê chuyên nghiệp.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              src="/images/service2.jpg"
+              class="card-img-top"
+              alt="Dịch vụ 2"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Giao hàng tận nơi</h5>
+              <p class="card-text">Giao hàng nhanh chóng và tiện lợi.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              src="/images/service3.jpg"
+              class="card-img-top"
+              alt="Dịch vụ 3"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Tư vấn chọn cà phê</h5>
+              <p class="card-text">
+                Hỗ trợ khách hàng chọn loại cà phê phù hợp.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
