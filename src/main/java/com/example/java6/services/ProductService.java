@@ -49,4 +49,7 @@ public class ProductService {
         return productRepository.findAll(pageable);
     }
 
+    public List<Product> getNewProducts() {
+        return productRepository.findTop5ByOrderByCreateDateDesc();
+    }
 }

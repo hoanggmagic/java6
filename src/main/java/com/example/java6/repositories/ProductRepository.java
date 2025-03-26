@@ -10,6 +10,8 @@ import org.springframework.data.jpa.repository.Query;
 import com.example.java6.entities.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
+
+    List<Product> findTop5ByOrderByCreateDateDesc();
     // bài1 lab7 phương thức truy vấn @query(jpql)
     // @Query("FROM Product o WHERE o.price BETWEEN ?1 AND ?2")
     // List<Product> findByPrice(double minPrice, double maxPrice);

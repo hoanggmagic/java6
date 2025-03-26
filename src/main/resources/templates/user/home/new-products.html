@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi" th:replace="~{/user/layouts/templateUser.html::view(~{::main},~{::products})}">
+
+<head>
+    <title>Sản phẩm mới</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        /* Hiệu ứng card */
+        .product-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Ảnh sản phẩm */
+        .product-image {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* Nút */
+        .btn-custom {
+            background-color: #f8b400;
+            color: white;
+            font-weight: bold;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .btn-custom:hover {
+            background-color: #d49000;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <main class="container py-4">
+        <h1 class="text-center mb-4">Sản phẩm mới</h1>
+
+        <div class="row">
+            <th:block th:if="${products != null and not #lists.isEmpty(products)}">
+                <div class="col-md-4 mb-4" th:each="product : ${products}">
+                    <div class="card product-card">
+                        <img th:src="@{/images/{image}(image=${product.image})}" alt="Ảnh sản phẩm"
+                            class="card-img-top product-image">
+                        <div class="card-body text-center">
+                            <h5 class="card-title" th:text="${product.name}">Tên sản phẩm</h5>
+                            <p class="card-text">
+                                Giá: <span
+                                    th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}"></span>
+                                VND
+                            </p>
+                            <p class="text-muted">
+                                Ngày tạo: <span th:text="${#dates.format(product.createDate, 'dd/MM/yyyy')}"></span>
+                            </p>
+                            <form th:action="@{/user/cart/add/{id}(id=${product.id})}" method="post">
+                                <button type="submit" class="btn-add-cart">Thêm vào giỏ hàng</button>
+                            </form>
+                            <a th:href="@{/product/{id}(id=${product.id})}" class="btn btn-custom">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+            <p class="text-center text-danger fw-bold" th:if="${products == null or #lists.isEmpty(products)}">Không có
+                sản phẩm mới.</p>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS (nếu cần) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
