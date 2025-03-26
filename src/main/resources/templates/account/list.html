@@ -1,52 +1,61 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{/admin/layouts/template.html::view(~{::main},~{::title})}">
-
-<head>
+<html
+  lang="en"
+  th:replace="~{/admin/layouts/template.html::view(~{::main},~{::title})}"
+>
+  <head>
     <title>ffff</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <main>
-        <table class="table table-bordered">
-            <a href="/accounts/create" class="btn btn-primary">Thêm mới</a>
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Full Name</th>
-                    <th>Email</th>
-                    <th>Photo</th>
-                    <th>Activated</th>
-                    <th>Admin</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="account : ${accounts}">
-                    <td th:text="${account.username}"></td>
-                    <td th:text="${account.fullname}"></td>
-                    <td th:text="${account.email}"></td>
-                    <td>
-                        <!-- <img th:src="${account.photo}" alt="Photo" width="50" height="50" class="rounded"> -->
-                        <img th:src="@{${account.photo}}" alt="User Photo" width="100">
-
-                    </td>
-                    <td>
-                        <span th:text="${account.activated} ? 'Active' : 'Inactive'"></span>
-                    </td>
-                    <td>
-                        <span th:text="${account.admin} ? 'Yes' : 'No'"></span>
-                    </td>
-                    <td>
-                        <a th:href="@{/accounts/edit/{username}(username=${account.username})}"
-                            class="btn btn-warning btn-sm">Sửa</a>
-                        <a th:href="@{/accounts/delete/{username}(username=${account.username})}"
-                            class="btn btn-danger btn-sm"
-                            onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+      <table class="table table-bordered">
+        <h2>Danh sách người dùng</h2>
+        <a href="/accounts/create" class="btn btn-primary">Thêm mới</a>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Photo</th>
+            <th>Activated</th>
+            <th>Admin</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="account : ${accounts}">
+            <td th:text="${account.username}"></td>
+            <td th:text="${account.fullname}"></td>
+            <td th:text="${account.email}"></td>
+            <td>
+              <!-- <img th:src="${account.photo}" alt="Photo" width="50" height="50" class="rounded"> -->
+              <img th:src="@{${account.photo}}" alt="User Photo" width="100" />
+            </td>
+            <td>
+              <span
+                th:text="${account.activated} ? 'Active' : 'Inactive'"
+              ></span>
+            </td>
+            <td>
+              <span th:text="${account.admin} ? 'Yes' : 'No'"></span>
+            </td>
+            <td>
+              <a
+                th:href="@{/accounts/edit/{username}(username=${account.username})}"
+                class="btn btn-warning btn-sm"
+                >Sửa</a
+              >
+              <a
+                th:href="@{/accounts/delete/{username}(username=${account.username})}"
+                class="btn btn-danger btn-sm"
+                onclick="return confirm('Bạn có chắc chắn muốn xóa?');"
+                >Xóa</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </main>
-</body>
-
+  </body>
 </html>
