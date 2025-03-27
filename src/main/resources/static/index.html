@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="vi" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS với Spring Boot</title>
+    <script src="node_modules/angular/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="MainController">
+        <h1>{{ message }}</h1>
+    </div>
+
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("MainController", function ($scope) {
+            $scope.message = "Xin chào từ AngularJS!";
+        });
+    </script>
+</body>
+
+</html>

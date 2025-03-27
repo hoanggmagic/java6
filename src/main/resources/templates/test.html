@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản phẩm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .product-card {
+            width: 250px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            padding-bottom: 10px;
+        }
+
+        .product-badge {
+            position: relative;
+            background: red;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .platform {
+            color: #ffd700;
+            margin-left: 5px;
+        }
+
+        .deal-label {
+            background: #00c853;
+            color: white;
+            font-size: 10px;
+            padding: 2px 5px;
+            border-radius: 5px;
+            position: absolute;
+            right: 10px;
+            top: 8px;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        .product-info {
+            padding: 10px;
+        }
+
+        .product-title {
+            font-size: 14px;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .product-price {
+            font-size: 18px;
+            color: #e53935;
+            font-weight: bold;
+        }
+
+        .discount {
+            font-size: 12px;
+            color: #757575;
+            margin-left: 5px;
+        }
+
+        .product-rating {
+            font-size: 14px;
+            color: #ffb400;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="product-card">
+        <div class="product-badge">
+            <span class="shop-name">SIÊU SHOP</span>
+            <span class="platform">Lazada</span>
+            <span class="deal-label">DEAL XỊN</span>
+        </div>
+        <div class="product-image">
+            <img src="https://tse3.mm.bing.net/th?id=OIP.QVHuq09v2mLB_3xUgEpOlwHaE8&pid=Api&P=0&h=180"
+                alt="Full color paint half helmet cmr204">
+        </div>
+        <div class="product-info">
+            <h3 class="product-title">Full color paint half helmet cmr204</h3>
+            <p class="product-price">
+                <span class="current-price">₫41,200</span>
+                <span class="discount">-47%</span>
+            </p>
+            <div class="product-rating">
+                ★★★★☆ (734)
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
