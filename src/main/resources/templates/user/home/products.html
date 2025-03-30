@@ -1,29 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{/user/layouts/templateUser.html::view(~{::main},~{::title})}">
+<!-- <html lang="en" th:replace="~{/user/layouts/templateUser.html::view(~{::main},~{::title})}"> -->
 
 <head>
     <title>Danh sách Sản phẩm</title>
     <style>
-        /* Container chính */
         .container {
             max-width: 1200px;
             margin: auto;
         }
 
-        /* Tiêu đề */
         h2 {
             font-size: 28px;
             font-weight: bold;
             color: #333;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        /* Card sản phẩm */
         .card {
+            position: relative;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
             background: white;
+            text-align: center;
+            padding-bottom: 15px;
         }
 
         .card:hover {
@@ -33,7 +35,7 @@
 
         .card img {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
             border-bottom: 3px solid #f8b400;
         }
@@ -46,35 +48,39 @@
             font-size: 18px;
             font-weight: bold;
             color: #222;
+            margin-bottom: 10px;
         }
 
-        .fw-bold {
-            font-size: 16px;
+        .price {
+            font-size: 20px;
+            font-weight: bold;
             color: #f8b400;
         }
 
-        /* Nút thêm vào giỏ hàng */
-        .btn-add-cart {
-            background-color: #f8b400;
+        .original-price {
+            font-size: 16px;
+            text-decoration: line-through;
+            color: #999;
+            margin-left: 8px;
+        }
+
+        .discount-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: red;
             color: white;
-            border: none;
-            padding: 10px 15px;
+            padding: 5px 10px;
             border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease-in-out, transform 0.2s;
+            font-size: 14px;
+            font-weight: bold;
         }
 
-        .btn-add-cart:hover {
-            background-color: #d49000;
-            transform: translateY(-2px);
-        }
-
-        /* Phân trang */
         .pagination {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             margin-top: 30px;
         }
 
@@ -95,7 +101,7 @@
             border-color: #f8b400;
         }
 
-        .pagination a.active {
+        .pagination .active {
             font-weight: bold;
             color: white;
             background-color: #f8b400;
@@ -106,14 +112,23 @@
 
 <body>
     <main class="container">
-        <h2 class="text-center my-4">Danh sách Sản phẩm</h2>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div th:each="product : ${productPage.content}" class="col">
+        <h2>Danh sách sản phẩm</h2>
+
+        <div class="row">
+            <div class="col-md-4" th:each="product : ${page.content}">
                 <div class="card">
-                    <img th:src="@{${product.image}}" alt="Ảnh sản phẩm" class="product-image" th:if="${product.image}">
-                    <div class="card-body text-center">
-                        <h5 class="card-title" th:text="${product.name}">Tên sản phẩm</h5>
-                        <p class="fw-bold">Giá: <span th:text="${product.price}">0</span> VND</p>
+                    <p class="discount-label" th:if="${product.getDiscountPercentage() > 0}">
+                        -<span th:text="${product.getDiscountPercentage()}"></span>%
+                    </p>
+
+                    <img th:src="@{${product.image}}" class="card-img-top" alt="Ảnh sản phẩm">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${product.name}"></h5>
+                        <p>
+                            <span class="price" th:text="${product.price} + ' VND'"></span>
+                            <span class="original-price" th:if="${product.getDiscountPercentage() > 0}"
+                                th:text="${product.originalPrice} + ' VND'"></span>
+                        </p>
                         <form th:action="@{/user/cart/add/{id}(id=${product.id})}" method="post">
                             <button type="submit" class="btn-add-cart">Thêm vào giỏ hàng</button>
                         </form>
@@ -122,20 +137,15 @@
             </div>
         </div>
 
-        <!-- Điều hướng phân trang -->
-        <div class="pagination mt-4 text-center" th:if="${productPage.totalPages > 1}">
-            <a th:if="${productPage.number > 0}" th:href="@{/products(page=0)}">First</a>
-            <a th:if="${productPage.number > 0}" th:href="@{/products(page=${productPage.number - 1})}">Previous</a>
+        <div class="pagination">
+            <a th:if="${page.number > 0}" th:href="@{/products?page=0}">First</a>
+            <a th:if="${page.hasPrevious()}" th:href="@{/products?page={num}(num=${page.number - 1})}">Previous</a>
 
-            <span th:each="i: ${#numbers.sequence(0, productPage.totalPages - 1)}">
-                <a th:href="@{/products(page=${i})}" th:text="${i + 1}"
-                    th:classappend="${productPage.number == i} ? 'active' : ''"></a>
-            </span>
+            <span class="active">Trang [[${page.number + 1}]] / [[${page.totalPages}]]</span>
 
-            <a th:if="${productPage.number < productPage.totalPages - 1}"
-                th:href="@{/products(page=${productPage.number + 1})}">Next</a>
-            <a th:if="${productPage.number < productPage.totalPages - 1}"
-                th:href="@{/products(page=${productPage.totalPages - 1})}">Last</a>
+            <a th:if="${page.hasNext()}" th:href="@{/products?page={num}(num=${page.number + 1})}">Next</a>
+            <a th:if="${page.number < page.totalPages - 1}"
+                th:href="@{/products?page={num}(num=${page.totalPages - 1})}">Last</a>
         </div>
     </main>
 </body>

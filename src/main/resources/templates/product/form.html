@@ -2,7 +2,7 @@
 <html lang="en" th:replace="~{/admin/layouts/template.html::view(~{::main},~{::title})}">
 
 <head>
-    <title>ffff</title>
+    <title>Quản lý Sản phẩm</title>
 </head>
 
 <body>
@@ -16,11 +16,15 @@
                 <label>Tên sản phẩm:</label>
                 <input type="text" th:field="*{name}" required>
 
-                <label>Giá:</label>
-                <input type="number" th:field="*{price}" step="0.01" required>
+                <label>Giá gốc:</label>
+                <input type="number" th:field="*{originalPrice}" step="0.01" min="0" required>
+
+                <label>Giá bán:</label>
+                <input type="number" th:field="*{price}" step="0.01" min="0" required>
 
                 <label>Ngày tạo:</label>
-                <input type="date" th:field="*{createDate}" required>
+                <input type="date" th:field="*{createDate}"
+                    th:value="${#dates.format(product.createDate, 'yyyy-MM-dd')}" required>
 
                 <label>Trạng thái:</label>
                 <select th:field="*{available}">
@@ -37,7 +41,8 @@
                 <label>Ảnh sản phẩm:</label>
                 <input type="file" name="imageFile" accept="image/*">
                 <div>
-                    <img th:src="@{${product.image}}" alt="Ảnh sản phẩm" width="100" th:if="${product.image}">
+                    <img th:src="@{${product.image != null ? product.image : '/images/default.png'}}" alt="Ảnh sản phẩm"
+                        width="100">
                 </div>
 
                 <button type="submit">Lưu sản phẩm</button>

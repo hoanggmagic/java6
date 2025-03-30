@@ -55,19 +55,24 @@ public class ProductController1 {
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Integer id, Model model) {
-        Product product = productService.findById(id);
-        if (product != null) {
-            model.addAttribute("product", product);
+        Optional<Product> productOpt = Optional.ofNullable(productService.findById(id));
+        if (productOpt.isPresent()) {
+            model.addAttribute("product", productOpt.get());
             model.addAttribute("categories", categoryService.findAll());
             return "product/form";
         }
-
         return "redirect:/admin/product";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable Integer id) {
-        productService.deleteById(id);
+    public String deleteProduct(@PathVariable Integer id, Model model) {
+        Product product = productService.findById(id);
+        if (product != null && (product.getOrderDetails() == null || product.getOrderDetails().isEmpty())) {
+            productService.deleteById(id);
+        } else {
+            model.addAttribute("error", "Không thể xóa sản phẩm vì đã có đơn hàng liên quan.");
+        }
         return "redirect:/admin/product";
     }
+
 }

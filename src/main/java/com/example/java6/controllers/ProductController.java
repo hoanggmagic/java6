@@ -22,12 +22,21 @@ public class ProductController {
 
     @GetMapping
     public String listProducts(Model model, @RequestParam(defaultValue = "0") int page) {
-        int pageSize = 6; // Số sản phẩm mỗi trang
+        int pageSize = 6;
         Pageable pageable = PageRequest.of(page, pageSize);
-
         Page<Product> productPage = productService.findAll(pageable);
-        model.addAttribute("productPage", productPage);
 
-        return "user/home/products"; // Trả về giao diện hiển thị danh sách sản phẩm
+        // Kiểm tra số trang hợp lệ
+        int totalPages = productPage.getTotalPages();
+        if (page < 0)
+            page = 0;
+        if (page >= totalPages)
+            page = totalPages - 1;
+
+        model.addAttribute("page", productPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+
+        return "user/home/products";
     }
 }
