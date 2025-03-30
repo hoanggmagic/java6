@@ -14,7 +14,7 @@ public class Category implements Serializable {
     @Column(length = 50, nullable = false, unique = true)
     private String id;
 
-    @Column(length = 100, nullable = false, unique = true) // Tên danh mục không được trùng
+    @Column(columnDefinition = "nvarchar(100)", nullable = false, unique = true) // Đổi thành nvarchar
     private String name;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

@@ -1,34 +1,144 @@
 <footer class="coffee-footer">
-    <div class="footer-container">
-        <div class="footer-logo">
-            <h2>Coffee House</h2>
-            <p>Hương vị tuyệt vời từ những hạt cà phê nguyên chất.</p>
-        </div>
-        <div class="footer-links">
-            <h3>Liên kết nhanh</h3>
-            <ul>
-                <li><a href="#">Trang chủ</a></li>
-                <li><a href="#">Sản phẩm</a></li>
-                <li><a href="#">Giới thiệu</a></li>
-                <li><a href="#">Liên hệ</a></li>
-            </ul>
-        </div>
-        <div class="footer-contact">
-            <h3>Liên hệ</h3>
-            <p>Email: support@coffeehouse.com</p>
-            <p>Điện thoại: 0123 456 789</p>
-            <p>Địa chỉ: 123 Đường Cà Phê, TP. Hồ Chí Minh</p>
-        </div>
-        <div class="footer-social">
-            <h3>Kết nối với chúng tôi</h3>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-            </div>
-        </div>
+  <div class="footer-container">
+    <div class="footer-logo">
+      <h2>TOM store</h2>
+      <p>Hãy tạo ra phong cách của riêng bạn</p>
     </div>
-    <div class="footer-bottom">
-        <p>&copy; Home Coffee</p>
+    <div class="footer-links">
+      <h3>Liên kết nhanh</h3>
+      <ul>
+        <li><a href="#">Trang chủ</a></li>
+        <li><a href="#">Sản phẩm</a></li>
+        <li><a href="#">Giới thiệu</a></li>
+        <li><a href="#">Liên hệ</a></li>
+      </ul>
     </div>
+    <div class="footer-contact">
+      <h3>Liên hệ</h3>
+      <p>Email: tomstore@gmail.com</p>
+      <p>Điện thoại: 0123 456 789</p>
+      <p>Địa chỉ: 123 Đường asd, TP. Hồ Chí Minh</p>
+    </div>
+    <div class="footer-social">
+      <h3>Kết nối với chúng tôi</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; TOM Store</p>
+  </div>
 </footer>
+<style>
+  /* Footer tổng thể */
+  .coffee-footer {
+    background: linear-gradient(
+      to right,
+      #a9b5df,
+      #578fca
+    ); /* Gradient từ trái qua phải */
+    color: black;
+    padding: 40px 0;
+    font-family: "Arial", sans-serif;
+  }
+
+  /* Container footer */
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+  }
+
+  /* Phần logo + slogan */
+  .footer-logo h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  .footer-logo p {
+    font-size: 16px;
+    color: black;
+  }
+
+  /* Liên kết nhanh */
+  .footer-links h3,
+  .footer-contact h3,
+  .footer-social h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-links li {
+    margin-bottom: 8px;
+  }
+
+  .footer-links a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover {
+    color: #ffcc00; /* Màu vàng khi hover */
+  }
+
+  /* Liên hệ */
+  .footer-contact p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: black;
+  }
+
+  /* Mạng xã hội */
+  .social-icons {
+    display: flex;
+    gap: 15px;
+  }
+
+  .social-icons a {
+    color: black;
+    font-size: 24px;
+    transition: transform 0.3s, color 0.3s;
+  }
+
+  .social-icons a:hover {
+    color: #ffcc00; /* Màu vàng khi hover */
+    transform: scale(1.2);
+  }
+
+  /* Phần bottom */
+  .footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #444;
+  }
+
+  .footer-bottom p {
+    font-size: 14px;
+    color: black;
+  }
+
+  /* Responsive: hiển thị tốt trên điện thoại */
+  @media (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      text-align: center;
+    }
+    .social-icons {
+      justify-content: center;
+    }
+  }
+</style>

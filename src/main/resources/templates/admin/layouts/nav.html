@@ -1,22 +1,121 @@
 <header>
-    <div class="container">
-        <div th:if="${username != null}" class="dropdown">
-            <a class="btn btn-light dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                <b th:text="${username}"></b>
-            </a>
+  <div class="container">
+    <div th:if="${username != null}" class="dropdown">
+      <a
+        class="btn btn-light dropdown-toggle"
+        href="#"
+        role="button"
+        id="userDropdown"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <b th:text="${username}"></b>
+      </a>
 
-            <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="/auth/profile">Chỉnh sửa thông tin</a></li>
-                <li><a class="dropdown-item text-danger" href="/auth/logout">Đăng xuất</a></li>
-            </ul>
-        </div>
-        <a href="/admin/home"><i class="fas fa-home"></i> Trang chủ</a>
-        <a href="/report/inventory-by-category"><i class="fas fa-box"></i>Tồn kho theo loại</a>
-        <a href="#"><i class="fas fa-file-alt"></i> Bài viết</a>
-        <a href="#"><i class="fas fa-user"></i> Thành viên</a>
-        <a href="#"><i class="fas fa-cog"></i> Cấu hình</a>
-
+      <ul class="dropdown-menu" aria-labelledby="userDropdown">
+        <li>
+          <a class="dropdown-item" href="/auth/profile">Chỉnh sửa thông tin</a>
+        </li>
+        <li>
+          <a class="dropdown-item text-danger" href="/auth/logout">Đăng xuất</a>
+        </li>
+      </ul>
     </div>
-
+    <a href="/admin/home"><i class="fas fa-home"></i> Trang chủ</a>
+    <a href="/report/inventory-by-category"
+      ><i class="fas fa-box"></i>Tồn kho theo loại</a
+    >
+    <a href="#"><i class="fas fa-file-alt"></i> Bài viết</a>
+    <a href="#"><i class="fas fa-user"></i> Thành viên</a>
+    <a href="#"><i class="fas fa-cog"></i> Cấu hình</a>
+  </div>
 </header>
+<style>
+  /* Header */
+  header {
+    background: linear-gradient(
+      to right,
+      #a9b5df,
+      #578fca
+    ); /* Gradient từ trái qua phải */
+    padding: 15px 0;
+    color: white;
+  }
+
+  /* Container */
+  header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+  }
+
+  /* Link trong header */
+  header a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    margin-right: 20px;
+    transition: color 0.3s;
+  }
+
+  header a:hover {
+    color: #ffc107; /* Màu vàng khi hover */
+  }
+
+  /* Icon trong menu */
+  header i {
+    margin-right: 8px;
+  }
+
+  /* Dropdown */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  /* Nút dropdown */
+  .dropdown-toggle {
+    background-color: white !important;
+    color: black !important;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  .dropdown-toggle:hover {
+    background-color: #eaeaea !important;
+  }
+
+  /* Menu dropdown */
+  .dropdown-menu {
+    background-color: white;
+    border-radius: 8px;
+    min-width: 180px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .dropdown-menu a {
+    color: #333 !important;
+    padding: 10px 15px;
+    display: block;
+  }
+
+  .dropdown-menu a:hover {
+    background-color: #f8f9fa;
+  }
+
+  /* Responsive - hiển thị tốt trên mobile */
+  @media (max-width: 768px) {
+    header .container {
+      flex-direction: column;
+      text-align: center;
+    }
+    header a {
+      display: block;
+      margin: 10px 0;
+    }
+  }
+</style>
