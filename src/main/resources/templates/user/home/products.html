@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
 <!-- <html lang="en" th:replace="~{/user/layouts/templateUser.html::view(~{::main},~{::title})}"> -->
 
 <head>
@@ -28,63 +27,23 @@
             text-align: center;
             padding-bottom: 15px;
         }
-=======
-<html
-  lang="vi"
-  th:replace="~{/user/layouts/templateUser.html::view(~{::main},~{::title})}"
->
-  <head>
-    <title>Danh sách Sản phẩm</title>
-    <style>
-      /* Container chính */
-      .container {
-        max-width: 1200px;
-        margin: auto;
-      }
 
-      /* Tiêu đề */
-      h2 {
-        font-size: 28px;
-        font-weight: bold;
-        color: #333;
-      }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+        }
 
-      /* Card sản phẩm */
-      .card {
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        background: white;
-      }
->>>>>>> 542af274a4572cee681067f8d1ed71e81c244e96
-
-      .card:hover {
-        transform: scale(1.05);
-        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
-      }
-
-<<<<<<< HEAD
         .card img {
             width: 100%;
             height: 220px;
             object-fit: cover;
             border-bottom: 3px solid #f8b400;
         }
-=======
-      .card img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-bottom: 3px solid #f8b400;
-      }
->>>>>>> 542af274a4572cee681067f8d1ed71e81c244e96
 
-      .card-body {
-        padding: 15px;
-      }
+        .card-body {
+            padding: 15px;
+        }
 
-<<<<<<< HEAD
         .card-title {
             font-size: 18px;
             font-weight: bold;
@@ -124,82 +83,35 @@
             gap: 10px;
             margin-top: 30px;
         }
-=======
-      .card-title {
-        font-size: 18px;
-        font-weight: bold;
-        color: #222;
-      }
 
-      .fw-bold {
-        font-size: 16px;
-        color: #f8b400;
-      }
+        .pagination a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
 
-      /* Nút thêm vào giỏ hàng */
-      .btn-add-cart {
-        background-color: #f8b400;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background 0.3s ease-in-out, transform 0.2s;
-      }
+        .pagination a:hover {
+            background-color: #f8b400;
+            color: white;
+            border-color: #f8b400;
+        }
 
-      .btn-add-cart:hover {
-        background-color: #d49000;
-        transform: translateY(-2px);
-      }
-
-      /* Phân trang */
-      .pagination {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-        margin-top: 30px;
-      }
->>>>>>> 542af274a4572cee681067f8d1ed71e81c244e96
-
-      .pagination a {
-        padding: 10px 15px;
-        text-decoration: none;
-        font-size: 16px;
-        font-weight: bold;
-        color: #333;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        transition: all 0.3s ease-in-out;
-      }
-
-      .pagination a:hover {
-        background-color: #f8b400;
-        color: white;
-        border-color: #f8b400;
-      }
-
-<<<<<<< HEAD
         .pagination .active {
             font-weight: bold;
             color: white;
             background-color: #f8b400;
             border: 1px solid #f8b400;
         }
-=======
-      .pagination a.active {
-        font-weight: bold;
-        color: white;
-        background-color: #f8b400;
-        border: 1px solid #f8b400;
-      }
->>>>>>> 542af274a4572cee681067f8d1ed71e81c244e96
     </style>
-  </head>
+</head>
 
-  <body>
+<body>
     <main class="container">
-<<<<<<< HEAD
         <h2>Danh sách sản phẩm</h2>
 
         <div class="row">
@@ -222,37 +134,11 @@
                         </form>
                     </div>
                 </div>
-=======
-      <h2 class="text-center my-4">Danh sách Sản phẩm</h2>
-      <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div th:each="product : ${productPage.content}" class="col">
-          <div class="card">
-            <img
-              th:src="@{${product.image}}"
-              alt="Ảnh sản phẩm"
-              class="product-image"
-              th:if="${product.image}"
-            />
-            <div class="card-body text-center">
-              <h5 class="card-title" th:text="${product.name}">Tên sản phẩm</h5>
-              <p class="fw-bold">
-                Giá: <span th:text="${product.price}">0</span> VND
-              </p>
-              <form
-                th:action="@{/user/cart/add/{id}(id=${product.id})}"
-                method="post"
-              >
-                <button type="submit" class="btn-add-cart">
-                  Thêm vào giỏ hàng
-                </button>
-              </form>
->>>>>>> 542af274a4572cee681067f8d1ed71e81c244e96
             </div>
-          </div>
         </div>
-      </div>
+        </div>
+        </div>
 
-<<<<<<< HEAD
         <div class="pagination">
             <a th:if="${page.number > 0}" th:href="@{/products?page=0}">First</a>
             <a th:if="${page.hasPrevious()}" th:href="@{/products?page={num}(num=${page.number - 1})}">Previous</a>
@@ -263,41 +149,7 @@
             <a th:if="${page.number < page.totalPages - 1}"
                 th:href="@{/products?page={num}(num=${page.totalPages - 1})}">Last</a>
         </div>
-=======
-      <!-- Điều hướng phân trang -->
-      <div
-        class="pagination mt-4 text-center"
-        th:if="${productPage.totalPages > 1}"
-      >
-        <a th:if="${productPage.number > 0}" th:href="@{/products(page=0)}"
-          >First</a
-        >
-        <a
-          th:if="${productPage.number > 0}"
-          th:href="@{/products(page=${productPage.number - 1})}"
-          >Previous</a
-        >
-
-        <span th:each="i: ${#numbers.sequence(0, productPage.totalPages - 1)}">
-          <a
-            th:href="@{/products(page=${i})}"
-            th:text="${i + 1}"
-            th:classappend="${productPage.number == i} ? 'active' : ''"
-          ></a>
-        </span>
-
-        <a
-          th:if="${productPage.number < productPage.totalPages - 1}"
-          th:href="@{/products(page=${productPage.number + 1})}"
-          >Next</a
-        >
-        <a
-          th:if="${productPage.number < productPage.totalPages - 1}"
-          th:href="@{/products(page=${productPage.totalPages - 1})}"
-          >Last</a
-        >
-      </div>
->>>>>>> 542af274a4572cee681067f8d1ed71e81c244e96
     </main>
-  </body>
+</body>
+
 </html>
