@@ -3,12 +3,152 @@
 
 <head>
     <title>Giỏ hàng</title>
+    <style>
+        /* Import Bootstrap */
+        @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css');
+
+        /* Thiết lập chung */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Bố cục giỏ hàng */
+        main {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Tiêu đề */
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Bảng sản phẩm */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #28a745;
+            color: white;
+        }
+
+        /* Hình ảnh sản phẩm */
+        img {
+            border-radius: 5px;
+            width: 60px;
+            height: auto;
+        }
+
+        /* Input số lượng */
+        input[type="number"] {
+            width: 70px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Nút bấm */
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        /* Nút xóa */
+        form[action*="cart/remove"] button,
+        form[action*="cart/clear"] button {
+            background: #dc3545;
+        }
+
+        form[action*="cart/remove"] button:hover,
+        form[action*="cart/clear"] button:hover {
+            background: #c82333;
+        }
+
+        /* Tổng tiền */
+        p {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        /* Ô nhập địa chỉ */
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Form thanh toán */
+        form[action*="checkout"] {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Form xóa giỏ hàng */
+        form[action*="cart/clear"] {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        /* Bootstrap Responsive */
+        @media (max-width: 768px) {
+            main {
+                width: 95%;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            input[type="number"] {
+                width: 50px;
+            }
+
+            button {
+                padding: 6px 12px;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <main>
-        <h2>Giỏ hàng</h2>
-        <table>
+        <h2 style="color: #333;">Giỏ hàng</h2>
+        <table style="color: #333;">
             <tr th:each="item : ${cartItems}">
                 <td><img th:src="@{/images/{imageName}(imageName=${item.product.image})}" width="50"></td>
                 <td th:text="${item.product.name}"></td>
@@ -27,8 +167,8 @@
                 </td>
             </tr>
         </table>
-        <p><strong>Tổng cộng:</strong> <span th:text="${total}"></span> VND</p>
-        <form th:action="@{/checkout}" method="post">
+        <p style="color: #333;"><strong>Tổng cộng:</strong> <span th:text="${total}"></span> VND</p>
+        <form th:action="@{/checkout}" method="post" style="color: #333;">
             <label for="address">Địa chỉ giao hàng:</label>
             <input type="text" id="address" name="address" required>
             <button type="submit">Thanh toán</button>
@@ -36,7 +176,7 @@
 
 
 
-        <form th:action="@{/user/cart/clear}" method="post">
+        <form th:action="@{/user/cart/clear}" method="post" style="color: #333;">
             <button type="submit">Xóa giỏ hàng</button>
         </form>
     </main>

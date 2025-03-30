@@ -33,7 +33,8 @@ public class SecurityConfig {
                                                                                                                 // tĩnh
                                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                                 .requestMatchers("/user/**").hasRole("USER")
-                                                .requestMatchers("/login", "/auth/**", "/home/**", "/products")
+                                                .requestMatchers("/login", "/auth/**", "/home/**", "/new-products/**",
+                                                                "/services/**", "/products")
                                                 .permitAll()
                                                 .anyRequest().authenticated())
 

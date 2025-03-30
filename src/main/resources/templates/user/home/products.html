@@ -110,7 +110,9 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div th:each="product : ${productPage.content}" class="col">
                 <div class="card">
-                    <img th:src="@{${product.image}}" alt="Ảnh sản phẩm" class="product-image" th:if="${product.image}">
+                    <img th:src="@{/images/{imageName}(imageName=${product.image})}" alt="Ảnh sản phẩm"
+                        class="product-image">
+
                     <div class="card-body text-center">
                         <h5 class="card-title" th:text="${product.name}">Tên sản phẩm</h5>
                         <p class="fw-bold">Giá: <span th:text="${product.price}">0</span> VND</p>
