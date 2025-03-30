@@ -20,7 +20,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping
+    @GetMapping("")
     public String listProducts(Model model, @RequestParam(defaultValue = "0") int page) {
         int pageSize = 6;
         Pageable pageable = PageRequest.of(page, pageSize);
@@ -33,7 +33,7 @@ public class ProductController {
         if (page >= totalPages)
             page = totalPages - 1;
 
-        model.addAttribute("page", productPage);
+            model.addAttribute("productPage", productPage);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
 
