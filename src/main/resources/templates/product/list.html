@@ -7,58 +7,6 @@
     <title>Danh sách Sản phẩm</title>
   </head>
 
-<<<<<<< HEAD
-<head>
-    <title>Danh sách Sản phẩm</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-</head>
-
-<body>
-    <main>
-        <div class="container mt-4">
-            <h2 class="mb-3">Danh sách Sản phẩm</h2>
-
-            <a href="/admin/product/create" class="btn btn-primary mb-3">Thêm mới sản phẩm</a>
-
-            <table class="table table-bordered table-hover">
-                <thead class="table-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Tên</th>
-                        <th>Giá</th>
-                        <th>Ngày tạo</th>
-                        <th>Trạng thái</th>
-                        <th>Danh mục</th>
-                        <th>Hình ảnh</th>
-                        <th>Hành động</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="product : ${products}">
-                        <td th:text="${product.id}"></td>
-                        <td th:text="${product.name}"></td>
-                        <td th:text="${#numbers.formatInteger(product.price, 0, 'COMMA') + ' VND'}"></td>
-                        <td th:text="${#dates.format(product.createDate, 'dd/MM/yyyy')}"></td>
-                        <td th:text="${product.available} ? 'Có sẵn' : 'Hết hàng'"></td>
-                        <td th:text="${product.category.name}"></td>
-                        <td>
-                            <img th:src="@{${product.image != null ? product.image : '/images/default.png'}}"
-                                alt="Ảnh sản phẩm" width="50">
-                        </td>
-                        <td>
-                            <a th:href="@{/admin/product/edit/{id}(id=${product.id})}"
-                                class="btn btn-warning btn-sm">Sửa</a>
-                            <a th:href="@{/admin/product/delete/{id}(id=${product.id})}"
-                                onclick="return confirm('Bạn có chắc chắn muốn xóa?');"
-                                class="btn btn-danger btn-sm">Xóa</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <a href="/home" class="btn btn-secondary">Quay lại trang chủ</a>
-        </div>
-=======
   <body>
     <main>
       <table class="table table-bordered">
@@ -113,7 +61,6 @@
           </tr>
         </tbody>
       </table>
->>>>>>> 542af274a4572cee681067f8d1ed71e81c244e96
     </main>
   </body>
 </html>

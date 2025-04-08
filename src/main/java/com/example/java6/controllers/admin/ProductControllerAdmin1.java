@@ -73,10 +73,9 @@ public class ProductControllerAdmin1 {
         model.addAttribute("items", items);
         return "product/search";
     }
-
     // bai2 lab7
     // @RequestMapping("/product/search-and-page")
-    // public String searchAndPage(Model model,
+  // public String searchAndPage(Model model,
     // @RequestParam("keywords") Optional<String> kw,
     // @RequestParam("p") Optional<Integer> p) {
     // String keywords = kw.orElse(session.get("keywords", ""));
@@ -87,7 +86,6 @@ public class ProductControllerAdmin1 {
     // model.addAttribute("keywords", keywords);
     // return "product/search-and-page";
     // }
-
     // bai5 lab7
     @RequestMapping("/product/search-and-page")
     public String searchAndPage(Model model,

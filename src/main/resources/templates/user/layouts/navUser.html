@@ -1,83 +1,109 @@
-<header class="p-3 text-bg-dark">
-  <!-- <<<<<<< HEAD -->
+<header class="header-vintage">
+  <!-- ==== NAVIGATION BAR ==== -->
   <div class="container">
-    <div class="navbar navbar-expand-lg navbar-dark">
-      <div class="container">
-        <a class="navbar-brand" href="#">HOME COFFEE</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item"><a class="nav-link active" href="/home">Trang chủ</a></li>
-            <li class="nav-item"><a class="nav-link" href="/products">Sản phẩm</a></li>
-            <li class="nav-item"><a class="nav-link" href="/new-products">Sản phẩm mới</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Bán chạy</a></li>
-            <li class="nav-item"><a class="nav-link" href="/services">Dịch vụ</a></li>
-            <li class="nav-item"><a class="nav-link" href="/contact">Liên hệ</a></li>
-          </ul>
-          <div class="nav-icons">
-            <a href="/user/cart" class="icon"><i class="fas fa-shopping-cart"></i></a>
-            <!-- ======= -->
-            <!-- <div class="container">
-    <div class="navbar navbar-expand-lg navbar-dark">
-      <div class="container">
-        <a class="navbar-brand" href="#">HOME COFFEE</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item">
-              <a class="nav-link active" href="/home">Trang chủ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/products">Sản phẩm</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/new-products">Sản phẩm mới</a>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="#">Bán chạy</a></li>
-            <li class="nav-item">
-              <a class="nav-link" href="/services">Dịch vụ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/contact">Liên hệ</a>
-            </li>
-          </ul>
-          <div class="nav-icons">
-            <a href="/user/cart" class="icon"
-              ><i class="fas fa-shopping-cart"></i
-            ></a>
->>>>>>> f27fad5fce963b2b773dfa736c0b7b7bdaaae356
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand" href="#">VINTAGE</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-            <!-- Nếu đã đăng nhập -->
-            <div th:if="${username != null}" class="dropdown">
-              <a class="btn btn-light dropdown-toggle" href="#" role="button" id="userDropdown"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                <b th:text="${username}"></b>
-              </a>
+      <div
+        class="collapse navbar-collapse justify-content-between"
+        id="navbarNav"
+      >
+        <!-- ==== MENU CHÍNH ==== -->
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="/home">Trang chủ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/products">Sản phẩm</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/new-products">Sản phẩm mới</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#">Bán chạy</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="/services">Dịch vụ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact">Liên hệ</a>
+          </li>
+        </ul>
 
-              <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                <li>
-                  <a class="dropdown-item" href="/auth/profile">Chỉnh sửa thông tin</a>
-                </li>
-                <li>
-                  <a class="dropdown-item text-danger" href="/auth/logout">Đăng xuất</a>
-                </li>
-              </ul>
-            </div>
+        <!-- ==== ICONS VÀ ĐĂNG NHẬP ==== -->
+        <div class="nav-icons d-flex align-items-center gap-3">
+          <!-- Giỏ hàng -->
+          <a href="/user/cart" class="icon"
+            ><i class="fas fa-shopping-cart"></i
+          ></a>
 
-            <!-- Nếu chưa đăng nhập -->
-            <a th:if="${username == null}" href="/auth/login" class="btn btn-contact">Đăng nhập</a>
+          <!-- Đăng nhập / Đăng xuất -->
+          <div th:if="${username != null}" class="dropdown">
+            <a
+              class="btn btn-light dropdown-toggle"
+              href="#"
+              role="button"
+              id="userDropdown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <b th:text="${username}"></b>
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="userDropdown"
+            >
+              <li>
+                <a class="dropdown-item" href="/auth/profile"
+                  >Chỉnh sửa thông tin</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item text-danger" href="/auth/logout"
+                  >Đăng xuất</a
+                >
+              </li>
+            </ul>
           </div>
+
+          <a th:if="${username == null}" href="/auth/login" class="btn-login"
+            >Đăng nhập</a
+          >
         </div>
       </div>
-    </div>
+    </nav>
   </div>
-</header> -->
+
+  <!-- ==== SLIDE BANNER ==== -->
+  <section class="slide-body">
+    <div class="container_slide">
+      <div class="slides">
+        <!-- Slide 1 -->
+        <div class="slide active">
+          <img
+            src="https://img3.thuthuatphanmem.vn/uploads/2019/10/14/banner-thoi-trang-dep_113856538.jpg"
+            alt="Slide 1"
+          />
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+          <img
+            src="https://wiki.tino.org/wp-content/uploads/2022/07/word-image-55365-2.png"
+            alt="Slide 2"
+          />
+        </div>
+
+        <!-- Nút điều hướng slide -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+    </div>
+  </section>
+</header>

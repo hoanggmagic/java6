@@ -18,6 +18,282 @@
     href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/all.min.css"
   />
 
-  <!--  <link rel="stylesheet" th:href="@{/css/styleUser.css}"> -->
-  <link rel="stylesheet" th:href="@{/css/styleUser.css}" />
+  <style>
+    /* ==== RESET ==== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", sans-serif;
+      color: #333;
+      background-color: #fdfdfd;
+    }
+
+    /* ==== HEADER VINTAGE ==== */
+    .header-vintage {
+      background-color: #fff;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+      position: relative;
+      z-index: 1000;
+    }
+
+    .header-vintage .navbar {
+      padding: 1rem 0;
+    }
+
+    .header-vintage .navbar-brand {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #c48c46;
+    }
+
+    .header-vintage .nav-link {
+      color: #333;
+      font-weight: 500;
+      margin: 0 10px;
+      transition: all 0.3s;
+    }
+
+    .header-vintage .nav-link:hover,
+    .header-vintage .nav-link.active {
+      color: #c48c46;
+    }
+
+    .nav-icons .icon i {
+      font-size: 1.3rem;
+      color: #333;
+      transition: color 0.3s;
+    }
+
+    .nav-icons .icon:hover i {
+      color: #c48c46;
+    }
+
+    .btn-login {
+      padding: 6px 14px;
+      border: 1px solid #c48c46;
+      border-radius: 20px;
+      color: #c48c46;
+      background-color: transparent;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .btn-login:hover {
+      background-color: #c48c46;
+      color: white;
+    }
+
+    /* ==== SLIDE BANNER ==== */
+    .slide-body {
+      margin-top: 20px;
+    }
+
+    .container_slide {
+      max-width: 1200px;
+      margin: auto;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .slides {
+      position: relative;
+      width: 100%;
+      height: 450px;
+    }
+
+    .slides .slide {
+      display: none;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slides .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .slides .slide.active {
+      display: block;
+      animation: fade 1s ease-in-out;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0.4;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .slides .prev,
+    .slides .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      padding: 12px;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 50%;
+      transition: all 0.3s;
+    }
+
+    .slides .prev:hover,
+    .slides .next:hover {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .slides .prev {
+      left: 20px;
+    }
+
+    .slides .next {
+      right: 20px;
+    }
+
+    /* ==== FOOTER ==== */
+    .coffee-footer {
+      background-color: #f8f3eb;
+      padding: 40px 0 20px;
+      margin-top: 50px;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    .footer-container h2,
+    .footer-container h3 {
+      color: #c48c46;
+      margin-bottom: 15px;
+    }
+
+    .footer-container p,
+    .footer-container li,
+    .footer-container a {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.8;
+      text-decoration: none;
+    }
+
+    .footer-container ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links a:hover {
+      color: #c48c46;
+      text-decoration: underline;
+    }
+
+    .footer-social .social-icons a {
+      display: inline-block;
+      margin-right: 10px;
+      font-size: 1.2rem;
+      color: #444;
+      transition: color 0.3s;
+    }
+
+    .footer-social .social-icons a:hover {
+      color: #c48c46;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 10px;
+      font-size: 14px;
+      color: #888;
+      border-top: 1px solid #ddd;
+    }
+
+    /* ====== GLOBAL ====== */
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #fff;
+      color: #333;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      color: #e53935;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ====== HERO SECTION ====== */
+    .hero-section {
+      padding: 2rem 1rem;
+      background-color: #fdf6f6;
+    }
+
+    .body_countdown .title,
+    .body_produc .title {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .countdown_item {
+      font-size: 1.2rem;
+      background-color: #ffebee;
+      color: #d32f2f;
+      padding: 0.5rem 1rem;
+      display: inline-block;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 0.5rem;
+    }
+
+    /* ====== PRODUCT CONTAINER ====== */
+    .container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .show_produc {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    /* ====== CARD PRODUCT ====== */
+    .card {
+      background-color: #fff;
+      border: 1px solid #eee;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .items {
+      padding: 1rem;
+      display: flex;
+    }
+  </style>
 </head>

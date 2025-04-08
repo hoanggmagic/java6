@@ -4,25 +4,60 @@
   th:replace="~{/user/layouts/templateUser.html::view(~{::main},~{::title})}"
 >
   <head>
-    <title>ffff</title>
+    <title>Welcome to Coffee House</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f1ee;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 100px auto;
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        color: #6b4f3b;
+        line-height: 1.2;
+      }
+
+      p {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 30px;
+      }
+
+      .buttons a {
+        display: inline-block;
+        padding: 12px 24px;
+        margin: 10px;
+        background-color: #a0522d;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+      }
+
+      .buttons a:hover {
+        background-color: #8b4513;
+      }
+    </style>
   </head>
 
   <body>
     <main>
-      <div class="hero-section">
+      <div>
         <div class="container text-center">
-          <h1>
-            TIME TO DISCOVER <br />
-            COFFEE HOUSE
-          </h1>
-          <p>
-            The coffee is brewed by first roasting the green coffee beans over
-            hot coals...
-          </p>
-          <div class="buttons">
-            <a href="#" class="btn btn-primary">TESTY COFFEE</a>
-            <a href="#" class="btn btn-outline-light">LEARN MORE</a>
-          </div>
+          <h1></h1>
+          <p></p>
         </div>
       </div>
     </main>
