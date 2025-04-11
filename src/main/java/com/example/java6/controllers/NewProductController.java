@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -21,4 +22,15 @@ public class NewProductController {
         model.addAttribute("products", newProducts);
         return "user/home/new-products.html";
     }
+
+    @GetMapping("/product/{id}")
+    public String showProductDetail(@PathVariable("id") Integer id, Model model) {
+        Product product = productService.findById(id);
+        if (product == null) {
+            return "redirect:/new-products";
+        }
+        model.addAttribute("product", product);
+        return "user/home/product-detail-page.html";
+    }
+
 }

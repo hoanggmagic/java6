@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Chỉnh sửa thông tin</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 600px;
+            margin: 30px auto;
+            background-color: #f5f5f5;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form>div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="file"] {
+            width: calc(100% - 160px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        img {
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        p {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        p[style*="green"] {
+            color: green;
+        }
+
+        p[style*="red"] {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Thông tin người dùng</h2>
+
+    <form th:action="@{/profile/update}" th:object="${account}" method="post" enctype="multipart/form-data">
+        <div>
+            <label>Username:</label>
+            <input type="text" th:field="*{username}" readonly />
+        </div>
+
+        <div>
+            <label>Họ tên:</label>
+            <input type="text" th:field="*{fullname}" required />
+        </div>
+
+        <div>
+            <label>Email:</label>
+            <input type="email" th:field="*{email}" required />
+        </div>
+
+        <div>
+            <label>Mật khẩu mới:</label>
+            <input type="password" name="newPassword" placeholder="Để trống nếu không đổi" />
+        </div>
+
+        <div>
+            <label>Ảnh đại diện:</label>
+            <input type="file" name="imageFile" accept="image/*" onchange="previewImage(event)" />
+        </div>
+
+        <div>
+            <label>Xem trước ảnh đại diện:</label><br />
+            <img id="avatarPreview" th:src="@{/images/{photo}(photo=${account.photo})}" alt="avatar" width="100" />
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <button type="submit">Lưu thay đổi</button>
+            <a th:href="@{/home}" style="
+                display: inline-block;
+                padding: 6px 12px;
+                background-color: #ddd;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                text-decoration: none;
+                color: black;
+                line-height: 24px;
+            ">Quay lại trang chủ</a>
+        </div>
+
+        <div th:if="${successMessage}">
+            <p style="color: green;" th:text="${successMessage}"></p>
+        </div>
+        <div th:if="${errorMessage}">
+            <p style="color: red;" th:text="${errorMessage}"></p>
+        </div>
+    </form>
+
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const preview = document.getElementById('avatarPreview');
+                preview.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+</body>
+
+</html>
