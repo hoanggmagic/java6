@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -52,4 +53,14 @@ public class ProductService {
     public List<Product> getNewProducts() {
         return productRepository.findTop5ByOrderByCreateDateDesc();
     }
+
+    public List<Product> getFlashSaleProducts() {
+        return productRepository.findFlashSaleProducts();
+    }
+
+    public List<Product> getTopSellingProducts(int limit) {
+        Pageable pageable = PageRequest.of(0, limit);
+        return productRepository.findTopSellingProducts(pageable);
+    }
+
 }

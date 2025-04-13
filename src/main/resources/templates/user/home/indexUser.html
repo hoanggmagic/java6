@@ -1,30 +1,67 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  th:replace="~{/user/layouts/templateUser.html::view(~{::main},~{::title})}"
->
-  <head>
-    <title>ffff</title>
-  </head>
+<html lang="en" th:replace="~{/user/layouts/templateUser.html::view(~{::main}, ~{::title})}">
 
-  <body>
-    <main>
-      <div class="hero-section">
-        <div class="container text-center">
-          <h1>
-            TIME TO DISCOVER <br />
-            COFFEE HOUSE
-          </h1>
-          <p>
-            The coffee is brewed by first roasting the green coffee beans over
-            hot coals...
-          </p>
-          <div class="buttons">
-            <a href="#" class="btn btn-primary">TESTY COFFEE</a>
-            <a href="#" class="btn btn-outline-light">LEARN MORE</a>
+<head>
+  <title>Trang chủ</title>
+</head>
+
+<body>
+  <main>
+    <main class="container-productUser">
+      <h2>Sản phẩm Flash Sale</h2>
+
+      <div class="row">
+        <div class="col-md-4" th:each="product : ${flashSale}">
+          <div class="card">
+            <p class="discount-label">
+              -<span th:text="${product.getDiscountPercentage()}"></span>%
+            </p>
+            <img th:src="@{${product.image}}" alt="Ảnh sản phẩm">
+            <div class="card-body">
+              <h5 class="card-title" th:text="${product.name}"></h5>
+              <p>
+                <span class="price" th:text="${product.price} + ' VND'"></span>
+                <span class="original-price" th:text="${product.originalPrice} + ' VND'"></span>
+              </p>
+              <form th:action="@{/user/cart/add/{id}(id=${product.id})}" method="post">
+                <button type="submit" class="btn-add-cart">Thêm vào giỏ hàng</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
+
+      <hr style="margin: 40px 0; border-color: #ddd;">
+
+      <h2>Danh sách Sản phẩm</h2>
+
+      <div class="row">
+        <div class="col-md-4" th:each="product : ${page.content}">
+          <div class="card">
+            <img th:src="@{${product.image}}" alt="Ảnh sản phẩm">
+            <div class="card-body">
+              <h5 class="card-title" th:text="${product.name}"></h5>
+              <p>
+                <span class="price" th:text="${product.price} + ' VND'"></span>
+              </p>
+              <form th:action="@{/user/cart/add/{id}(id=${product.id})}" method="post">
+                <button type="submit" class="btn-add-cart">Thêm vào giỏ hàng</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <a th:if="${currentPage > 0}" th:href="@{/home?page=0}">First</a>
+        <a th:if="${currentPage > 0}" th:href="@{/home?page={num}(num=${currentPage - 1})}">Previous</a>
+
+        <span class="active">Trang [[${currentPage + 1}]] / [[${totalPages}]]</span>
+
+        <a th:if="${currentPage < totalPages - 1}" th:href="@{/home?page={num}(num=${currentPage + 1})}">Next</a>
+        <a th:if="${currentPage < totalPages - 1}" th:href="@{/home?page={num}(num=${totalPages - 1})}">Last</a>
+      </div>
     </main>
-  </body>
-</html>
+  </main>
+</body>
