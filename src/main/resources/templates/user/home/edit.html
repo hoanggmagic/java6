@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Chỉnh sửa thông tin</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        width: 600px;
+        margin: 30px auto;
+        background-color: #f9f9f9;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      form > div {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: inline-block;
+        width: 150px;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: calc(100% - 160px);
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+      }
+
+      img {
+        margin-top: 10px;
+        border-radius: 6px;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      .message {
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .message.success {
+        color: green;
+      }
+
+      .message.error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Cập nhật ảnh & mật khẩu</h2>
+
+    <form th:action="@{/profile/update}" th:object="${account}" method="post">
+      <div>
+        <label>Tên đăng nhập:</label>
+        <input type="text" th:field="*{username}" readonly />
+      </div>
+
+      <div>
+        <label>Tên ảnh đại diện:</label>
+        <input type="text" th:field="*{photo}" placeholder="VD: avatar1.jpg" />
+      </div>
+
+      <div>
+        <label>Xem trước ảnh:</label><br />
+        <img
+          th:src="@{/images/{photo}(photo=${account.photo})}"
+          alt="avatar"
+          width="100"
+        />
+      </div>
+
+      <div>
+        <label>Mật khẩu mới:</label>
+        <input
+          type="password"
+          name="newPassword"
+          placeholder="Để trống nếu không đổi"
+        />
+      </div>
+
+      <div style="margin-top: 20px">
+        <button type="submit">Lưu thay đổi</button>
+        <a
+          th:href="@{/home}"
+          style="
+            margin-left: 10px;
+            padding: 8px 14px;
+            background-color: #ccc;
+            color: black;
+            text-decoration: none;
+            border-radius: 6px;
+          "
+          >Quay lại</a
+        >
+      </div>
+
+      <div
+        th:if="${successMessage}"
+        class="message success"
+        th:text="${successMessage}"
+      ></div>
+      <div
+        th:if="${errorMessage}"
+        class="message error"
+        th:text="${errorMessage}"
+      ></div>
+    </form>
+  </body>
+</html>

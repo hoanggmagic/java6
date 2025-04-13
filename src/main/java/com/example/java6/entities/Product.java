@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -24,31 +25,20 @@ public class Product implements Serializable {
     private String image;
 
     @Column(nullable = false)
-    private Double originalPrice;
-
-    @Column(nullable = false)
     private Double price;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "createdate", nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd") // Định dạng ngày tháng đầu vào
     private Date createDate = new Date();
 
     private Boolean available;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoryid", nullable = false)
     private Category category;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<OrderDetail> orderDetails;
-
-    public int getDiscountPercentage() {
-        if (originalPrice != null && price != null && originalPrice > price && originalPrice > 0) {
-            return (int) Math.round(((originalPrice - price) / originalPrice) * 100);
-        }
-        return 0;
-    }
-
 }
