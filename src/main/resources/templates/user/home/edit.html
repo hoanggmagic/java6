@@ -105,7 +105,7 @@
 
         <div>
             <label>Xem trước ảnh đại diện:</label><br />
-            <img id="avatarPreview" th:src="@{/images/{photo}(photo=${account.photo})}" alt="avatar" width="100" />
+            <img id="avatarPreview" th:src="@{/uploads/{photo}(photo=${account.photo})}" alt="avatar" width="100" />
         </div>
 
         <div style="display: flex; gap: 10px; margin-top: 20px;">
@@ -129,6 +129,7 @@
             <p style="color: red;" th:text="${errorMessage}"></p>
         </div>
     </form>
+
 
     <script>
         function previewImage(event) {

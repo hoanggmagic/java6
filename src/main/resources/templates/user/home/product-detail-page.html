@@ -1,48 +1,26 @@
 <!DOCTYPE html>
-<html lang="vi" th:replace="~{/user/layouts/templateUser.html::view(~{::main},~{::product-detail})}">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Chi tiết sản phẩm</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <style>
-        .product-image {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .btn-custom {
-            background-color: #f8b400;
-            color: white;
-            font-weight: bold;
-            transition: background 0.3s ease-in-out;
-        }
-
-        .btn-custom:hover {
-            background-color: #d49000;
-        }
-    </style>
 </head>
 
-<body class="bg-light">
+<body>
     <main class="container py-4">
+        <h2 class="mb-4" th:text="${product.name}">Tên sản phẩm</h2>
         <div class="row">
             <div class="col-md-6">
-                <img th:src="@{/images/{image}(image=${product.image})}" alt="Ảnh sản phẩm" class="product-image">
+                <img class="img-fluid" th:src="@{'/images/' + ${product.image}}" alt="Ảnh sản phẩm">
             </div>
             <div class="col-md-6">
-                <h1 th:text="${product.name}">Tên sản phẩm</h1>
-                <p class="text-muted">Giá: <span
-                        th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}"></span> VND</p>
-                <p class="text-muted">Ngày tạo: <span
-                        th:text="${#dates.format(product.createDate, 'dd/MM/yyyy')}"></span></p>
-                <p th:text="${product.description}">Mô tả sản phẩm</p>
-                <form th:action="@{/user/cart/add/{id}(id=${product.id})}" method="post">
-                    <button type="submit" class="btn btn-custom">Thêm vào giỏ hàng</button>
-                </form>
+                <h4>Giá: <span th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}"></span> VND
+                </h4>
+                <!-- <p th:text="${product.description}">Mô tả sản phẩm</p> -->
+                <a href="/new-products" class="btn btn-secondary">Quay lại</a>
             </div>
         </div>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
