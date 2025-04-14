@@ -6,39 +6,34 @@
   <head>
     <title>Danh sách Sản phẩm</title>
   </head>
-
   <body>
     <main class="container">
-      <!-- Chỉnh: mỗi hàng 3 sản phẩm -->
+      <h2 class="mb-4">Danh sách Sản phẩm</h2>
       <div class="row row-cols-1 row-cols-md-3 g-4">
         <div th:each="product : ${productPage.content}" class="col">
           <div class="card">
-            <div class="card-img-container">
-              <img
-                th:src="@{${product.image}}"
-                alt="Ảnh sản phẩm"
-                class="card-img"
-                th:if="${product.image}"
-              />
-            </div>
+            <a th:href="@{'/product/' + ${product.id}}">
+              <div class="card-img-container">
+                <img
+                  th:src="@{${product.image}}"
+                  alt="Ảnh sản phẩm"
+                  class="card-img"
+                  th:if="${product.image}"
+                  style="height: 200px; object-fit: cover"
+                />
+              </div>
+            </a>
             <div class="card-body text-center">
               <h5 class="card-title" th:text="${product.name}">Tên sản phẩm</h5>
               <p class="fw-bold">
                 Giá: <span th:text="${product.price}">0</span> VND
               </p>
-              <form
-                th:action="@{/user/cart/add/{id}(id=${product.id})}"
-                method="post"
-              >
-                <button type="submit" class="btn-add-cart">
-                  Thêm vào giỏ hàng
-                </button>
-              </form>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- Phân trang -->
       <div
         class="pagination mt-4 text-center"
         th:if="${productPage.totalPages > 1}"
@@ -51,6 +46,7 @@
           th:href="@{/products(page=${productPage.number - 1})}"
           >Previous</a
         >
+
         <span th:each="i : ${#numbers.sequence(0, productPage.totalPages - 1)}">
           <a
             th:href="@{/products(page=${i})}"
@@ -58,6 +54,7 @@
             th:classappend="${productPage.number == i} ? 'active' : ''"
           ></a>
         </span>
+
         <a
           th:if="${productPage.number < productPage.totalPages - 1}"
           th:href="@{/products(page=${productPage.number + 1})}"
@@ -72,15 +69,8 @@
     </main>
 
     <style>
-      main.container {
-        max-width: 1200px;
-        margin: auto;
-        padding: 20px;
-      }
-
+      /* CSS cho giao diện */
       .card {
-        height: 100%;
-        max-width: 100%;
         border: none;
         border-radius: 16px;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
@@ -113,84 +103,17 @@
         border-top-right-radius: 16px;
       }
 
-      .card-body {
-        padding: 16px;
-      }
-
-      .card-title {
-        font-size: 16px;
-        font-weight: 600;
-        margin-bottom: 10px;
-      }
-
-      .btn-add-cart {
-        margin-top: 10px;
-        padding: 6px 12px;
-        font-size: 13px;
-        font-weight: 500;
-        background-color: #ff5f5f;
-        color: #fff;
-        border: none;
-        border-radius: 6px;
-        transition: background-color 0.3s ease;
-      }
-
-      .btn-add-cart:hover {
-        background-color: #e74c3c;
-        cursor: pointer;
-      }
-
       .pagination {
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 8px;
         margin-top: 30px;
-        flex-wrap: wrap;
-      }
-
-      .pagination a {
-        padding: 6px 12px;
-        border: 1px solid #ccc;
-        text-decoration: none;
-        border-radius: 6px;
-        font-size: 14px;
-        color: #333;
-        transition: background-color 0.2s ease;
-      }
-
-      .pagination a:hover {
-        background-color: #eee;
       }
 
       .pagination a.active {
         background-color: #ff5f5f;
         color: white;
-        border-color: #ff5f5f;
-      }
-
-      @media (max-width: 991px) {
-        .row.row-cols-md-3 {
-          row-gap: 1rem;
-        }
-
-        .card-img-container {
-          height: 160px;
-        }
-
-        .btn-add-cart {
-          width: 100%;
-        }
-      }
-
-      @media (max-width: 767px) {
-        .card-img-container {
-          height: 140px;
-        }
-
-        .card-title {
-          font-size: 14px;
-        }
       }
     </style>
   </body>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html
+  lang="vi"
+  th:replace="~{/user/layouts/templateUser.html::view(~{::main},~{::title})}"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <title>Chi tiết sản phẩm</title>
+  </head>
+
+  <body>
+    <main class="container py-4">
+      <div class="card mb-4">
+        <div class="row g-0">
+          <div class="col-md-6 card-img-container">
+            <img
+              th:src="@{${product.image}}"
+              alt="Ảnh sản phẩm"
+              class="card-img"
+              th:if="${product.image}"
+            />
+          </div>
+          <div class="col-md-6 d-flex flex-column justify-content-center p-4">
+            <h2 class="card-title mb-3 text-center" th:text="${product.name}">
+              Tên sản phẩm
+            </h2>
+            <p class="fw-bold fs-5 text-center">
+              Giá:
+              <span
+                th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}"
+              ></span>
+              VND
+            </p>
+            <!-- <p th:text="${product.description}">Mô tả sản phẩm</p> -->
+            <form
+              th:action="@{/user/cart/add/{id}(id=${product.id})}"
+              method="post"
+              class="text-center"
+            >
+              <button type="submit" class="btn-add-cart">
+                Thêm vào giỏ hàng
+              </button>
+            </form>
+            <div class="text-center mt-3">
+              <a href="/products" class="btn btn-secondary">Quay lại</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <style>
+      main.container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+      }
+
+      .card {
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        background-color: #ffffff;
+      }
+
+      .card-img-container {
+        height: 100%;
+        max-height: 400px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .card-img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+      }
+
+      .btn-add-cart {
+        margin-top: 10px;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: 500;
+        background-color: #ff5f5f;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn-add-cart:hover {
+        background-color: #e74c3c;
+        cursor: pointer;
+      }
+
+      .btn-secondary {
+        padding: 8px 16px;
+        border-radius: 6px;
+      }
+
+      @media (max-width: 767px) {
+        .card-title {
+          font-size: 18px;
+        }
+
+        .btn-add-cart,
+        .btn-secondary {
+          width: 100%;
+        }
+
+        .card-img-container {
+          max-height: 250px;
+        }
+      }
+    </style>
+  </body>
+</html>
