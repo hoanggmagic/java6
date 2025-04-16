@@ -8,6 +8,7 @@ import com.example.java6.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Date;
 import java.util.List;
 
@@ -26,36 +27,31 @@ public class OrderService {
     @Autowired
     private ProductRepository productRepository;
 
-    // @Transactional
-    // public Order createOrder(String username, String address, List<OrderDetail>
-    // orderDetails) {
-    // // Kiểm tra tài khoản
-    // Account account = accountRepository.findById(username)
-    // .orElseThrow(() -> new RuntimeException("Không tìm thấy tài khoản!"));
-
-    // // Tạo đơn hàng
-    // Order order = new Order();
-    // order.setAccount(account);
-    // order.setAddress(address);
-    // order.setCreateDate(new Date());
-
-    // order = orderRepository.save(order);
-
-    // // Lưu chi tiết đơn hàng
-    // for (OrderDetail detail : orderDetails) {
-    // Product product = productRepository.findById(detail.getProduct().getId())
-    // .orElseThrow(() -> new RuntimeException("Sản phẩm không tồn tại!"));
-
-    // detail.setOrder(order);
-    // detail.setProduct(product);
-    // orderDetailRepository.save(detail);
-    // }
-
-    // return order;
-    // }
-
     @Transactional
-    public Order createOrder(Order order) {
-        return orderRepository.save(order);
+    public Order createOrder(String username, String address, List<OrderDetail> orderDetails) throws Exception {
+        // Kiểm tra tài khoản
+        Account account = accountRepository.findById(username)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy tài khoản!"));
+
+        // Tạo đơn hàng mới
+        Order order = new Order();
+        order.setAccount(account);
+        order.setAddress(address);
+        order.setCreateDate(new Date());
+
+        // Lưu đơn hàng vào cơ sở dữ liệu
+        order = orderRepository.save(order);
+
+        // Lưu chi tiết đơn hàng
+        for (OrderDetail orderDetail : orderDetails) {
+            Product product = productRepository.findById(orderDetail.getProduct().getId())
+                    .orElseThrow(() -> new RuntimeException("Sản phẩm không tồn tại!"));
+
+            orderDetail.setOrder(order); // Gán Order cho OrderDetail
+            orderDetail.setProduct(product); // Gán Product cho OrderDetail
+            orderDetailRepository.save(orderDetail); // Lưu OrderDetail vào cơ sở dữ liệu
+        }
+
+        return order;
     }
 }

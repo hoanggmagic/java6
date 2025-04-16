@@ -1,0 +1,19 @@
+<!-- templates/user/home/checkout.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Thanh toán</title>
+  </head>
+  <body>
+    <h2>Thanh toán</h2>
+
+    <form th:action="@{/checkout}" method="post">
+      <label>Địa chỉ giao hàng:</label>
+      <input type="text" name="address" required />
+      <button type="submit">Xác nhận đặt hàng</button>
+    </form>
+
+    <p th:text="${message}" style="color: green"></p>
+    <p th:text="${error}" style="color: red"></p>
+  </body>
+</html>
