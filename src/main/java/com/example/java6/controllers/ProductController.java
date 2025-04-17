@@ -1,6 +1,5 @@
 package com.example.java6.controllers;
 
-import com.example.java6.entities.Account;
 import com.example.java6.entities.Product;
 import com.example.java6.services.ProductService;
 import org.springframework.security.core.Authentication;
@@ -21,11 +20,11 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    // Hiển thị danh sách sản phẩm
+    // Hiển thị danh sách sản phẩm có phân trang
     @GetMapping("/get")
     public String listProducts(Model model,
-                                @RequestParam(defaultValue = "0") int page,
-                                Authentication authentication) {
+                               @RequestParam(defaultValue = "0") int page,
+                               Authentication authentication) {
         if (authentication != null && authentication.isAuthenticated()) {
             Object principal = authentication.getPrincipal();
             if (principal instanceof UserDetails userDetails) {
@@ -35,7 +34,7 @@ public class ProductController {
                 for (GrantedAuthority authority : userDetails.getAuthorities()) {
                     if (authority.getAuthority().equals("ROLE_ADMIN")) {
                         // Chuyển hướng đến trang Admin nếu là Admin
-                        return "admin/home/products";  // Trang sản phẩm của Admin
+                        return "admin/home/products";
                     }
                 }
             }
@@ -54,6 +53,36 @@ public class ProductController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
 
-        return "user/home/products";  // Trang sản phẩm cho User
+        return "user/home/products";
+    }
+
+    // Hiển thị chi tiết sản phẩm
+    @GetMapping("/detail/{id}")
+    public String showProductDetail(@PathVariable("id") Integer id, Model model, Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails userDetails) {
+                model.addAttribute("username", userDetails.getUsername());
+
+                for (GrantedAuthority authority : userDetails.getAuthorities()) {
+                    if (authority.getAuthority().equals("ROLE_ADMIN")) {
+                        Product product = productService.findById(id);
+                        if (product == null) {
+                            return "redirect:/products/get";
+                        }
+                        model.addAttribute("product", product);
+                        return "admin/home/product-detail";
+                    }
+                }
+            }
+        }
+
+        // Nếu là User, hiển thị trang chi tiết sản phẩm cho người dùng
+        Product product = productService.findById(id);
+        if (product == null) {
+            return "redirect:/products/get";
+        }
+        model.addAttribute("product", product);
+        return "user/home/product-detail-page";
     }
 }

@@ -1,51 +1,77 @@
 package com.example.java6.services;
 
 import com.example.java6.dto.CartItemDTO;
+import com.example.java6.entities.Account;
+import com.example.java6.entities.Cart;
+import com.example.java6.entities.CartItem;
 import com.example.java6.entities.Product;
+import com.example.java6.repositories.CartItemRepository;
+import com.example.java6.repositories.CartRepository;
+import com.example.java6.repositories.ProductRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+// CartService.java
 @Service
 public class CartService {
-    private List<CartItemDTO> cartItems = new ArrayList<>();
 
-    public List<CartItemDTO> getCartItems() {
-        return cartItems;
+    @Autowired
+    private CartRepository cartRepository;
+
+    @Autowired
+    private CartItemRepository cartItemRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    public Cart getOrCreateCart(Account account) {
+        return cartRepository.findByAccount_Username(account.getUsername())
+                .orElseGet(() -> {
+                    Cart newCart = new Cart();
+                    newCart.setAccount(account);
+                    return cartRepository.save(newCart);
+                });
     }
 
-    public void addToCart(Product product) {
-        Optional<CartItemDTO> existingItem = cartItems.stream()
-                .filter(item -> item.getProduct().getId().equals(product.getId()))
+    public void addToCart(Account account, Integer productId, int quantity) {
+        Cart cart = getOrCreateCart(account);
+        Product product = productRepository.findById(productId).orElseThrow();
+
+        // Check if product is already in cart
+        Optional<CartItem> existingItem = cart.getCartItems().stream()
+                .filter(i -> i.getProduct().getId().equals(productId))
                 .findFirst();
 
         if (existingItem.isPresent()) {
-            existingItem.get().setQuantity(existingItem.get().getQuantity() + 1);
+            CartItem item = existingItem.get();
+            item.setQuantity(item.getQuantity() + quantity);
+            cartItemRepository.save(item);
         } else {
-            cartItems.add(new CartItemDTO(product, 1));
+            CartItem newItem = new CartItem();
+            newItem.setCart(cart);
+            newItem.setProduct(product);
+            newItem.setQuantity(quantity);
+            newItem.setPrice(product.getPrice());
+            cartItemRepository.save(newItem);
         }
     }
 
-    public void updateQuantity(int productId, int quantity) {
-        cartItems.forEach(item -> {
-            if (item.getProduct().getId().equals(productId)) {
-                item.setQuantity(quantity);
-            }
-        });
+    public List<CartItem> getCartItems(Account account) {
+        Cart cart = getOrCreateCart(account);
+        return cartItemRepository.findByCart_Id(cart.getId());
     }
 
-    public void removeItem(int productId) {
-        cartItems.removeIf(item -> item.getProduct().getId().equals(productId));
+    public void removeItem(Account account, Long itemId) {
+        Cart cart = getOrCreateCart(account);
+        cartItemRepository.deleteById(itemId);
     }
 
-    public void clearCart() {
-        cartItems.clear();
+    public void clearCart(Account account) {
+        Cart cart = getOrCreateCart(account);
+        cartItemRepository.deleteByCart_Id(cart.getId());
     }
-
-    public double getTotal() {
-        return cartItems.stream().mapToDouble(CartItemDTO::getTotalPrice).sum();
-    }
-
 }
