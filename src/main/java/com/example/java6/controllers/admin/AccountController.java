@@ -23,7 +23,7 @@ public class AccountController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    private static final String UPLOAD_DIR = "D:\\HocKy5\\Java6\\java6\\src\\main\\resources\\static\\images";
+    private static final String UPLOAD_DIR = "D:\\HocKy5\\Java6\\java6\\src\\main\\resources\\static\\images\\";
 
     @GetMapping
     public String listAccounts(Model model) {

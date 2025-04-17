@@ -2,6 +2,7 @@ package com.example.java6.controllers;
 
 import com.example.java6.entities.Account;
 import com.example.java6.entities.OrderDetail;
+import com.example.java6.repositories.CartItemRepository;
 import com.example.java6.entities.CartItem;
 import com.example.java6.services.AccountService;
 import com.example.java6.services.CartService;
@@ -25,6 +26,7 @@ public class CheckoutController {
     private final CartService cartService;
     private final OrderService orderService;
     private final AccountService accountService;
+    private final CartItemRepository cartItemRepository;
 
     // Hiển thị form thanh toán
     @GetMapping
@@ -70,13 +72,15 @@ public class CheckoutController {
                 detail.setPrice(item.getPrice());
                 detail.setQuantity(item.getQuantity());
                 orderDetails.add(detail);
+
             }
 
             // Gọi service tạo đơn hàng
             orderService.createOrder(user.getUsername(), address, orderDetails);
 
             // Xoá giỏ hàng
-            cartService.clearCart(user);
+           // cartService.clearCart(user);
+           cartItemRepository.deleteAll();
 
             redirectAttributes.addFlashAttribute("message", "Đặt hàng thành công!");
             return "redirect:/user/cart";

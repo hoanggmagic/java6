@@ -114,7 +114,7 @@ public class CartController {
         Account currentUser = accountService.getCurrentUser();
         cartService.removeItem(currentUser, itemId);
         redirectAttributes.addFlashAttribute("message", "Sản phẩm đã bị xóa!");
-        return "redirect:/user/cart";
+        return "redirect:/user/home/cart";
     }
 
     // Xóa toàn bộ giỏ hàng
@@ -128,6 +128,6 @@ public class CartController {
         Account currentUser = accountService.getCurrentUser();
         cartService.clearCart(currentUser);
         redirectAttributes.addFlashAttribute("message", "Giỏ hàng đã được làm trống!");
-        return "redirect:/user/cart";
+        return "redirect:/user/homehome/cart";
     }
 }
