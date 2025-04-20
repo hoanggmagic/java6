@@ -16,25 +16,29 @@
           <li class="nav-item"><a class="nav-link" href="#">Bán chạy</a></li>
           <li class="nav-item"><a class="nav-link" href="/services">Dịch vụ</a></li>
           <li class="nav-item"><a class="nav-link" href="/contact">Liên hệ</a></li>
+          <li class="nav-item"><a href="/user/cart" class="nav-link"><i class="fas fa-shopping-cart"></i></a></li>
         </ul>
+
+        <!-- ==== THANH TÌM KIẾM ==== -->
+        <form class="search-form d-flex align-items-center" action="/search" method="GET">
+          <input class="form-control" type="search" name="keyword" placeholder="Tìm sản phẩm..." aria-label="Search">
+          <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+        </form>
 
         <!-- ==== ICONS VÀ ĐĂNG NHẬP ==== -->
         <div class="nav-icons d-flex align-items-center gap-3">
-          <!-- Giỏ hàng -->
-          <a href="/user/cart" class="icon"><i class="fas fa-shopping-cart"></i></a>
-
-          <!-- Đăng nhập / Đăng xuất -->
+          <!-- Khi đã đăng nhập -->
           <div th:if="${username != null}" class="dropdown">
-            <a class="btn btn-light dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              <b th:text="${username}"></b>
+            <a class="btn btn-light dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown">
+              <b th:text="${username}">Tên người dùng</b>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
               <li><a class="dropdown-item" href="/auth/profile">Chỉnh sửa thông tin</a></li>
               <li><a class="dropdown-item text-danger" href="/auth/logout">Đăng xuất</a></li>
             </ul>
           </div>
 
+          <!-- Khi chưa đăng nhập -->
           <a th:if="${username == null}" href="/auth/login" class="btn-login">Đăng nhập</a>
         </div>
       </div>
@@ -47,22 +51,17 @@
       <div class="slides">
         <!-- Slide 1 -->
         <div class="slide active">
-          <img src="https://img3.thuthuatphanmem.vn/uploads/2019/10/14/banner-thoi-trang-dep_113856538.jpg"
-            alt="Slide 1">
+          <img src="https://hellomida.vn/wp-content/uploads/2023/09/banner-hlmd-1.jpg" alt="Slide 1">
         </div>
-
         <!-- Slide 2 -->
         <div class="slide">
-          <img src="https://wiki.tino.org/wp-content/uploads/2022/07/word-image-55365-2.png" alt="Slide 2">
+          <img src="https://owen.cdn.vccloud.vn/media/amasty/ampromobanners/ph_-ki_n-021024_optimized.jpg"
+            alt="Slide 2">
         </div>
-
         <!-- Slide 3 -->
         <div class="slide">
-          <img
-            src="https://img3.thuthuatphanmem.vn/uploads/2019/10/14/banner-thoi-trang-dang-cap-hien-dai_113856116.png"
-            alt="Slide 3">
+          <img src="https://toplist.vn/images/800px/kclosetvn-648225.jpg" alt="Slide 3">
         </div>
-
         <!-- Nút điều hướng slide -->
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>

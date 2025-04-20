@@ -1,0 +1,45 @@
+<!-- <!DOCTYPE html>
+<html lang="vi" th:replace="~{/user/layouts/templateUser.html::view(~{::main},~{::title})}">
+
+<head>
+    <title>Thanh toán</title>
+</head>
+
+<body>
+    <main class="checkout">
+        <h2>Thông tin thanh toán</h2>
+
+        <form th:action="@{/order/checkout}" method="post" th:object="${order}">
+            <label>Địa chỉ nhận hàng:</label>
+            <input type="text" th:field="*{address}" required />
+
+            <h3>Danh sách sản phẩm</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ảnh</th>
+                        <th>Tên</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${cartItems}">
+                        <td><img th:src="@{'/images/' + ${item.product.image}}" width="60"></td>
+                        <td th:text="${item.product.name}"></td>
+                        <td th:text="${item.product.price} + ' VND'"></td>
+                        <td th:text="${item.quantity}"></td>
+                        <td th:text="${item.totalPrice} + ' VND'"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Tổng cộng:</strong> <span th:text="${total} + ' VND'"></span></p>
+
+            <button type="submit">Xác nhận đặt hàng</button>
+        </form>
+    </main>
+</body>
+
+</html> -->

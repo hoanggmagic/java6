@@ -36,13 +36,19 @@ public class AuthController {
             HttpSession session, Model model) {
         Account account = accountService.findByEmail(username);
 
-        if (account != null && passwordEncoder.matches(password, account.getPassword())) { // Kiểm tra đúng cách
+        if (account != null && passwordEncoder.matches(password, account.getPassword())) {
             session.setAttribute("loggedInUser", account);
-            return "redirect:/home"; // Điều hướng đến trang chủ
+
+            // 🔑 Điều hướng theo vai trò
+            if (account.isAdmin()) {
+                return "redirect:/admin/home"; // Trang cho admin
+            } else {
+                return "redirect:/user/home"; // Trang cho user
+            }
         }
 
         model.addAttribute("error", "Email hoặc mật khẩu không đúng!");
-        return "login"; // Trả về trang login với thông báo lỗi
+        return "login";
     }
 
     @GetMapping("/sign-up")
@@ -93,7 +99,7 @@ public class AuthController {
         loggedInUser.setEmail(account.getEmail());
 
         if (!imageFile.isEmpty()) {
-            String uploadDir = "D:\\HocKy5\\Java6\\java6\\src\\main\\resources\\static\\images";
+            String uploadDir = "D:\\workspace\\lab6\\src\\main\\resources\\static\\images\\";
             File uploadFolder = new File(uploadDir);
             if (!uploadFolder.exists()) {
                 uploadFolder.mkdirs();

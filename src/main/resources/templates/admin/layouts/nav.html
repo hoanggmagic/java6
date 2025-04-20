@@ -1,14 +1,8 @@
 <header>
   <div class="container">
     <div th:if="${username != null}" class="dropdown">
-      <a
-        class="btn btn-light dropdown-toggle"
-        href="#"
-        role="button"
-        id="userDropdown"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
+      <a class="btn btn-light dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown"
+        aria-expanded="false">
         <b th:text="${username}"></b>
       </a>
 
@@ -22,9 +16,7 @@
       </ul>
     </div>
     <a href="/admin/home"><i class="fas fa-home"></i> Trang chủ</a>
-    <a href="/report/inventory-by-category"
-      ><i class="fas fa-box"></i>Tồn kho theo loại</a
-    >
+    <a href="/report/inventory-by-category"><i class="fas fa-box"></i>Tồn kho theo loại</a>
     <a href="#"><i class="fas fa-file-alt"></i> Bài viết</a>
     <a href="#"><i class="fas fa-user"></i> Thành viên</a>
     <a href="#"><i class="fas fa-cog"></i> Cấu hình</a>
@@ -33,11 +25,10 @@
 <style>
   /* Header */
   header {
-    background: linear-gradient(
-      to right,
-      #a9b5df,
-      #578fca
-    ); /* Gradient từ trái qua phải */
+    background: linear-gradient(to right,
+        #a9b5df,
+        #578fca);
+    /* Gradient từ trái qua phải */
     padding: 15px 0;
     color: white;
   }
@@ -62,7 +53,8 @@
   }
 
   header a:hover {
-    color: #ffc107; /* Màu vàng khi hover */
+    color: #ffc107;
+    /* Màu vàng khi hover */
   }
 
   /* Icon trong menu */
@@ -113,6 +105,7 @@
       flex-direction: column;
       text-align: center;
     }
+
     header a {
       display: block;
       margin: 10px 0;

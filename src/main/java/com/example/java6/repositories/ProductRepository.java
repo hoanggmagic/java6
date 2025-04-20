@@ -11,31 +11,20 @@ import com.example.java6.entities.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    // bài1 lab7 phương thức truy vấn @query(jpql)
-    // @Query("FROM Product o WHERE o.price BETWEEN ?1 AND ?2")
-    // List<Product> findByPrice(double minPrice, double maxPrice);
-
-    // bài4 lab7 sd DSL
+    // Tìm theo khoảng giá
     List<Product> findByPriceBetween(double minPrice, double maxPrice);
 
-    // bai2 lab7
-    // @Query("FROM Product o WHERE o.name LIKE ?1")
-    // Page<Product> findByKeywords(String keywords, Pageable pageable);
-
-    // bai5 lab7
+    // Tìm kiếm theo từ khóa (phân trang)
     Page<Product> findAllByNameLike(String keywords, Pageable pageable);
 
-    @Query("SELECT o.category AS group, sum(o.price) AS sum, count(o) AS count "
-            + " FROM Product o "
-            + " GROUP BY o.category"
-            + " ORDER BY sum(o.price) DESC")
-    List<Report> getInventoryByCategory();
-
+    // Top sản phẩm mới
     List<Product> findTop5ByOrderByCreateDateDesc();
 
+    // Flash Sale
     @Query("SELECT p FROM Product p WHERE p.originalPrice > p.price ORDER BY (p.originalPrice - p.price) DESC")
     List<Product> findFlashSaleProducts();
 
+    // Top sản phẩm bán chạy
     @Query("SELECT od.product FROM OrderDetail od GROUP BY od.product ORDER BY SUM(od.quantity) DESC")
     List<Product> findTopSellingProducts(Pageable pageable);
 }

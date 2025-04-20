@@ -1,42 +1,57 @@
-package com.example.java6.controllers;
+// package com.example.java6.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+// import java.util.Optional;
 
-import com.example.java6.services.ProductService;
-import com.example.java6.entities.Product;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.data.domain.Page;
+// import org.springframework.data.domain.PageRequest;
+// import org.springframework.data.domain.Pageable;
+// import org.springframework.stereotype.Controller;
+// import org.springframework.ui.Model;
+// import org.springframework.web.bind.annotation.GetMapping;
+// import org.springframework.web.bind.annotation.PathVariable;
+// import org.springframework.web.bind.annotation.RequestMapping;
+// import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller
-@RequestMapping("/products")
-public class ProductController {
+// import com.example.java6.services.ProductService;
+// import com.example.java6.entities.Product;
 
-    @Autowired
-    private ProductService productService;
+// @Controller
+// @RequestMapping("/products")
+// public class ProductController {
 
-    @GetMapping
-    public String listProducts(Model model, @RequestParam(defaultValue = "0") int page) {
-        int pageSize = 6;
-        Pageable pageable = PageRequest.of(page, pageSize);
-        Page<Product> productPage = productService.findAll(pageable);
+// @Autowired
+// private ProductService productService;
 
-        // Kiểm tra số trang hợp lệ
-        int totalPages = productPage.getTotalPages();
-        if (page < 0)
-            page = 0;
-        if (page >= totalPages)
-            page = totalPages - 1;
+// @GetMapping
+// public String listProducts(Model model, @RequestParam(defaultValue = "0") int
+// page) {
+// int pageSize = 6;
+// Pageable pageable = PageRequest.of(page, pageSize);
+// Page<Product> productPage = productService.findAll(pageable);
 
-        model.addAttribute("page", productPage);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", totalPages);
+// // Kiểm tra số trang hợp lệ
+// int totalPages = productPage.getTotalPages();
+// if (page < 0)
+// page = 0;
+// if (page >= totalPages)
+// page = totalPages - 1;
 
-        return "user/home/products";
-    }
-}
+// model.addAttribute("page", productPage);
+// model.addAttribute("currentPage", page);
+// model.addAttribute("totalPages", totalPages);
+
+// return "user/home/products";
+// }
+
+// @GetMapping("/product/{id}")
+// public String viewProductDetail(@PathVariable("id") Integer id, Model model)
+// {
+// Product product = productService.findById(id);
+// if (product == null) {
+// return "redirect:/404"; // hoặc trang lỗi nếu không tìm thấy
+// }
+// model.addAttribute("product", product);
+// return "user/home/products"; // file .jsp hoặc .html để hiển thị chi tiết
+// }
+// }
